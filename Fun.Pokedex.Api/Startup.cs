@@ -54,7 +54,7 @@ namespace Fun.Pokedex.Api
 
             services.AddTransient<IPokedexService, PokedexService>();
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
 
             services.AddCors(options =>
             {
