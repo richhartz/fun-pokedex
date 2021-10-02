@@ -27,5 +27,14 @@ namespace Fun.Pokedex.Core.UnitTests
                 },
             },
         };
+
+        public static TranslationModel TranslationModel => new ()
+        {
+            Contents = new TranslationContentsModel
+            {
+                Translated =
+                    "Created by a scientist after years of horrific gene splicing and dna engineering experiments,  it was.",
+            },
+        };
     }
 }

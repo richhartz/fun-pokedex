@@ -4,7 +4,9 @@
 
 namespace Fun.Pokedex.Core.UnitTests.PokedexServiceTests
 {
+    using System.Linq;
     using System.Threading.Tasks;
+    using Fun.Pokedex.Core.Constants;
     using Fun.Pokedex.Core.Models;
     using Fun.Pokedex.Core.Services;
     using Moq;
@@ -74,6 +76,29 @@ namespace Fun.Pokedex.Core.UnitTests.PokedexServiceTests
 
             // Assert
             Assert.AreEqual(Fixtures.PokemonSpeciesModel.Habitat.Name, actual.Habitat);
+        }
+
+        [Test]
+        public async Task GetByNameAsync_Should_Return_Correct_Description_Field()
+        {
+            // Act
+            var actual = await ServiceUnderTest.GetByNameAsync(Fixtures.PokemonSpeciesModel.Name);
+
+            var expected = Fixtures.PokemonSpeciesModel.FlavorTextEntries
+                .FirstOrDefault(x => x.Language.Name == Languages.Default)?.Text;
+
+            // Assert
+            Assert.AreEqual(expected, actual.Description);
+        }
+
+        [Test]
+        public async Task GetByNameAsync_Should_Return_Correct_Language_Field()
+        {
+            // Act
+            var actual = await ServiceUnderTest.GetByNameAsync(Fixtures.PokemonSpeciesModel.Name);
+
+            // Assert
+            Assert.AreEqual(Languages.Default, actual.Language);
         }
     }
 }

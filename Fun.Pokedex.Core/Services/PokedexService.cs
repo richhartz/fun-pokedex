@@ -2,14 +2,14 @@
 // Copyright (c) Pokedex :). All rights reserved.
 // </copyright>
 
-using Fun.Pokedex.Core.Extensions;
-
 namespace Fun.Pokedex.Core.Services
 {
-    using System;
     using System.Threading.Tasks;
     using Fun.Pokedex.Core.ApiClients;
+    using Fun.Pokedex.Core.Constants;
+    using Fun.Pokedex.Core.Extensions;
     using Fun.Pokedex.Core.Models;
+    using Fun.Pokedex.Core.Utils;
 
     /// <summary>
     /// service for retrieving pokemon data from the apis.
@@ -33,6 +33,8 @@ namespace Fun.Pokedex.Core.Services
         /// <inheritdoc cref="IPokedexService.GetByNameAsync"/>
         public async Task<PokemonResultModel> GetByNameAsync(string name)
         {
+            Guard.AgainstNull(nameof(name), name);
+
             var speciesModel = await pokeApiClient.GetSpeciesAsync(name);
 
             return speciesModel.ToPokemonModel();
@@ -41,7 +43,26 @@ namespace Fun.Pokedex.Core.Services
         /// <inheritdoc cref="IPokedexService.GetTranslatedAsync"/>
         public async Task<PokemonResultModel> GetTranslatedAsync(string name)
         {
-            throw new NotImplementedException();
+            Guard.AgainstNull(nameof(name), name);
+
+            var pokemon = await GetByNameAsync(name);
+
+            if (pokemon == null)
+            {
+                return null;
+            }
+
+            var translateTo = pokemon.IsLegendary || (pokemon.Habitat == Habitats.Cave) ? Languages.Yoda : Languages.Shakespeare;
+
+            var translation = await translationApiClient.TranslateAsync(pokemon.Description, translateTo);
+
+            if (translation?.Contents != null)
+            {
+                pokemon.Description = translation.Contents.Translated;
+                pokemon.Language = translateTo;
+            }
+
+            return pokemon;
         }
     }
 }

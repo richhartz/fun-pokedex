@@ -27,6 +27,9 @@ namespace Fun.Pokedex.Core.UnitTests.PokedexServiceTests
 
             MockPokeApiClient.Setup(x => x.GetSpeciesAsync(It.IsAny<string>()))
                 .Returns(Task.FromResult(Fixtures.PokemonSpeciesModel));
+
+            MockTranslationApiClient.Setup(x => x.TranslateAsync(It.IsAny<string>(), It.IsAny<string>()))
+                .Returns(Task.FromResult(Fixtures.TranslationModel));
         }
     }
 }

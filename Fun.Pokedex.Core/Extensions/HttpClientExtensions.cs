@@ -7,6 +7,7 @@ namespace Fun.Pokedex.Core.Extensions
     using System.Net.Http;
     using System.Threading.Tasks;
     using Newtonsoft.Json;
+    using Serilog;
 
     /// <summary>
     /// Class containing HttpClient Extension methods.
@@ -26,7 +27,7 @@ namespace Fun.Pokedex.Core.Extensions
 
             if (!response.IsSuccessStatusCode)
             {
-                // TODO log.
+                Log.Logger.Error($"Http Error Response : @{response}");
 
                 return default;
             }
