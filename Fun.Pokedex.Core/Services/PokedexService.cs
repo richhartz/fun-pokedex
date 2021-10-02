@@ -2,6 +2,8 @@
 // Copyright (c) Pokedex :). All rights reserved.
 // </copyright>
 
+using Fun.Pokedex.Core.Extensions;
+
 namespace Fun.Pokedex.Core.Services
 {
     using System;
@@ -31,7 +33,9 @@ namespace Fun.Pokedex.Core.Services
         /// <inheritdoc cref="IPokedexService.GetByNameAsync"/>
         public async Task<PokemonResultModel> GetByNameAsync(string name)
         {
-            throw new NotImplementedException();
+            var speciesModel = await pokeApiClient.GetSpeciesAsync(name);
+
+            return speciesModel.ToPokemonModel();
         }
 
         /// <inheritdoc cref="IPokedexService.GetTranslatedAsync"/>
