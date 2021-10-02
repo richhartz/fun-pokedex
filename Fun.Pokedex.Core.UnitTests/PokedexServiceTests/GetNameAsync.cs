@@ -20,7 +20,7 @@ namespace Fun.Pokedex.Core.UnitTests.PokedexServiceTests
     {
         [TestCase("bulbasaur")]
         [TestCase("ivysaur")]
-        public void GetByNameAsync_ShouldCall_PokeApiClient_GetSpecies_Once(string name)
+        public void ShouldCall_PokeApiClient_GetSpecies_Once(string name)
         {
             // Act
             ServiceUnderTest.GetByNameAsync(name);
@@ -30,7 +30,7 @@ namespace Fun.Pokedex.Core.UnitTests.PokedexServiceTests
         }
 
         [Test]
-        public async Task GetByNameAsync_Should_Return_Correct_InstanceType()
+        public async Task Should_Return_Correct_InstanceType()
         {
             // Act
             var actual = await ServiceUnderTest.GetByNameAsync(Fixtures.PokemonSpeciesModel.Name);
@@ -40,7 +40,7 @@ namespace Fun.Pokedex.Core.UnitTests.PokedexServiceTests
         }
 
         [Test]
-        public async Task GetByNameAsync_Should_Return_Correct_Id_Field()
+        public async Task Should_Return_Correct_Id_Field()
         {
             // Act
             var actual = await ServiceUnderTest.GetByNameAsync(Fixtures.PokemonSpeciesModel.Name);
@@ -50,7 +50,7 @@ namespace Fun.Pokedex.Core.UnitTests.PokedexServiceTests
         }
 
         [Test]
-        public async Task GetByNameAsync_Should_Return_Correct_Name_Field()
+        public async Task Should_Return_Correct_Name_Field()
         {
             // Act
             var actual = await ServiceUnderTest.GetByNameAsync(Fixtures.PokemonSpeciesModel.Name);
@@ -60,7 +60,7 @@ namespace Fun.Pokedex.Core.UnitTests.PokedexServiceTests
         }
 
         [Test]
-        public async Task GetByNameAsync_Should_Return_Correct_IsLegendary_Field()
+        public async Task Should_Return_Correct_IsLegendary_Field()
         {
             // Act
             var actual = await ServiceUnderTest.GetByNameAsync(Fixtures.PokemonSpeciesModel.Name);
@@ -70,7 +70,7 @@ namespace Fun.Pokedex.Core.UnitTests.PokedexServiceTests
         }
 
         [Test]
-        public async Task GetByNameAsync_Should_Return_Correct_Habitat_Field()
+        public async Task Should_Return_Correct_Habitat_Field()
         {
             // Act
             var actual = await ServiceUnderTest.GetByNameAsync(Fixtures.PokemonSpeciesModel.Name);
@@ -80,7 +80,7 @@ namespace Fun.Pokedex.Core.UnitTests.PokedexServiceTests
         }
 
         [Test]
-        public async Task GetByNameAsync_Should_Return_Correct_Description_Field()
+        public async Task Should_Return_Correct_Description_Field()
         {
             // Act
             var actual = await ServiceUnderTest.GetByNameAsync(Fixtures.PokemonSpeciesModel.Name);
@@ -93,7 +93,7 @@ namespace Fun.Pokedex.Core.UnitTests.PokedexServiceTests
         }
 
         [Test]
-        public async Task GetByNameAsync_Should_Return_Correct_Language_Field()
+        public async Task Should_Return_Correct_Language_Field()
         {
             // Act
             var actual = await ServiceUnderTest.GetByNameAsync(Fixtures.PokemonSpeciesModel.Name);
