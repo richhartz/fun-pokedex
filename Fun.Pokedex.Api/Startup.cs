@@ -5,6 +5,7 @@
 namespace Fun.Pokedex.Api
 {
     using System;
+    using Fun.Logging.Startup;
     using Fun.Pokedex.Core.ApiClients;
     using Fun.Pokedex.Core.Services;
     using Microsoft.AspNetCore.Builder;
@@ -39,6 +40,8 @@ namespace Fun.Pokedex.Api
         /// <param name="services">The <see cref="IServiceCollection"/>.</param>
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddFunLogging("Fun.Pokedex", "v1");
+
             services.AddHttpClient<IPokeApiClient, PokeApiClient>(c =>
             {
                 c.BaseAddress = new Uri(Configuration.GetValue<string>("Api:PokeApi"));
@@ -78,6 +81,9 @@ namespace Fun.Pokedex.Api
         /// <param name="env">Provides information regarding the hosting environment that the application is running in <see cref="IWebHostEnvironment"/>.</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseFunLogging();
+            app.UseFunErrorLogging();
+
             if (env.IsDevelopment())
             {
                 app.UseSwagger();

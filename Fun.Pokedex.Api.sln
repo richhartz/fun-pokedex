@@ -14,6 +14,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fun.Pokedex.Core", "Fun.Pok
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fun.Pokedex.Core.UnitTests", "Fun.Pokedex.Core.UnitTests\Fun.Pokedex.Core.UnitTests.csproj", "{17C399EB-F001-4217-818C-38225CB398B8}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fun.Logging", "Fun.Logging\Fun.Logging.csproj", "{A2D86CC7-D445-4CEC-837F-F1D41FED5910}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{17C399EB-F001-4217-818C-38225CB398B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17C399EB-F001-4217-818C-38225CB398B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17C399EB-F001-4217-818C-38225CB398B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2D86CC7-D445-4CEC-837F-F1D41FED5910}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2D86CC7-D445-4CEC-837F-F1D41FED5910}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2D86CC7-D445-4CEC-837F-F1D41FED5910}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2D86CC7-D445-4CEC-837F-F1D41FED5910}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

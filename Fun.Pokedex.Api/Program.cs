@@ -6,6 +6,7 @@ namespace Fun.Pokedex.Api
 {
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Hosting;
+    using Serilog;
 
     /// <summary>
     /// Class containing the main entry point for the application.
@@ -26,6 +27,6 @@ namespace Fun.Pokedex.Api
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                }).UseSerilog();
     }
 }

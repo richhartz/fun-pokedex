@@ -31,6 +31,7 @@
 
 
 	<ItemGroup>
+    <ProjectReference Include="..\Fun.Logging\Fun.Logging.csproj" />
     <ProjectReference Include="..\Fun.Pokedex.Core\Fun.Pokedex.Core.csproj" />
   </ItemGroup>
 
