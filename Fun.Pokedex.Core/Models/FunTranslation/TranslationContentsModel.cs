@@ -2,7 +2,7 @@
 // Copyright (c) Pokedex :). All rights reserved.
 // </copyright>
 
-namespace Fun.Pokedex.Core.Models
+namespace Fun.Pokedex.Core.Models.FunTranslation
 {
     /// <summary>
     /// Dto for reading in translation responses.

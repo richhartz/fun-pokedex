@@ -10,6 +10,7 @@ namespace Fun.Pokedex.Core.UnitTests.PokedexServiceTests
     using Fun.Pokedex.Core.Constants;
     using Fun.Pokedex.Core.Extensions;
     using Fun.Pokedex.Core.Models;
+    using Fun.Pokedex.Core.Models.FunTranslation;
     using Fun.Pokedex.Core.Models.PokeApi;
     using Fun.Pokedex.Core.Services;
     using Moq;

@@ -7,7 +7,7 @@ namespace Fun.Pokedex.Core.ApiClients
     using System.Net.Http;
     using System.Threading.Tasks;
     using Fun.Pokedex.Core.Extensions;
-    using Fun.Pokedex.Core.Models;
+    using Fun.Pokedex.Core.Models.FunTranslation;
 
     /// <summary>
     /// Http client for making requests to the translation api.

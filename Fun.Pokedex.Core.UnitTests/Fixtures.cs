@@ -6,7 +6,7 @@ namespace Fun.Pokedex.Core.UnitTests
 {
     using System.Collections.Generic;
     using Fun.Pokedex.Core.Constants;
-    using Fun.Pokedex.Core.Models;
+    using Fun.Pokedex.Core.Models.FunTranslation;
     using Fun.Pokedex.Core.Models.PokeApi;
 
     public static class Fixtures

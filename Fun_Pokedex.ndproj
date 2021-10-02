@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<NDepend AppName="TrueLayer.Pokedex.Api" Platform="DotNet" FileWrittenByProductVersion="2021.1.0.9500">
-  <OutputDir KeepXmlFiles="False">.\NDependOut</OutputDir>
+<NDepend AppName="Fun Pokedex" Platform="DotNet" FileWrittenByProductVersion="2021.1.0.9500">
+  <OutputDir KeepXmlFiles="False">.\NDependOut1</OutputDir>
   <IDEFiles>
-    <IDEFile FilePath=".\TrueLayer.Pokedex.Api.sln" Filters="-test" Configuration="DEBUG|AnyCPU">
+    <IDEFile FilePath=".\Fun.Pokedex.Api.sln" Filters="-test" Configuration="DEBUG|AnyCPU">
       <RootDirResolvingInfo Enabled="False" Hints="Debug|bin|.bin|AnyCPU|x64|x86|v*.*|net*" TimeOut="10">
         <RootDir>.</RootDir>
       </RootDirResolvingInfo>
@@ -19,14 +19,19 @@
     <Name>Microsoft.Extensions.DependencyInjection.Abstractions</Name>
     <Name>Microsoft.AspNetCore.Http.Abstractions</Name>
     <Name>System.Net.Http</Name>
+    <Name>Microsoft.AspNetCore.Cors</Name>
     <Name>Swashbuckle.AspNetCore.SwaggerGen</Name>
     <Name>Swashbuckle.AspNetCore.SwaggerUI</Name>
     <Name>Microsoft.AspNetCore.Routing</Name>
+    <Name>System.ComponentModel.Annotations</Name>
     <Name>Microsoft.Extensions.Hosting</Name>
     <Name>Microsoft.AspNetCore</Name>
+    <Name>Serilog.Extensions.Hosting</Name>
+    <Name>Serilog</Name>
+    <Name>Serilog.Extensions.Logging</Name>
     <Name>Microsoft.Extensions.Http</Name>
     <Name>Microsoft.AspNetCore.Mvc</Name>
-    <Name>Microsoft.AspNetCore.Diagnostics</Name>
+    <Name>Microsoft.AspNetCore.Mvc.NewtonsoftJson</Name>
     <Name>Swashbuckle.AspNetCore.Swagger</Name>
     <Name>Microsoft.AspNetCore.HttpsPolicy</Name>
     <Name>Microsoft.AspNetCore.Authorization.Policy</Name>
@@ -35,6 +40,13 @@
     <Name>Microsoft.OpenApi</Name>
     <Name>Newtonsoft.Json</Name>
     <Name>System.Linq</Name>
+    <Name>Serilog.AspNetCore</Name>
+    <Name>Serilog.Enrichers.Environment</Name>
+    <Name>Serilog.Enrichers.Process</Name>
+    <Name>Serilog.Enrichers.Thread</Name>
+    <Name>Serilog.Exceptions</Name>
+    <Name>Serilog.Formatting.Compact</Name>
+    <Name>Serilog.Sinks.Console</Name>
   </FrameworkAssemblies>
   <Dirs>
     <Dir>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\5.0.10</Dir>
@@ -2486,6 +2498,9 @@ where  t.IsClass &&
       // Validtor classes might not be instantiated 
       !t.SimpleName.EndsWith("Validator") &&
 
+      // Middelware classes might not be instantiated 
+      !t.SimpleName.EndsWith("Middleware") &&
+
       // Don't warn about classes instantiated by Dependency Injection frameworks
       !t.TypesUsingMe.Any(t1 => t1.TypesUsed.ParentNamespaces().Any(n => n.Name.StartsWithAny(
             "Microsoft.Extensions.DependencyInjection",
@@ -3379,7 +3394,7 @@ let infraNamespaceNames = new HashSet<string>() {
       "Validations", "EventStoreSQL", "Authorization",
       "Formatters", "Xml", "Json", "Enums",
       "Abstractions", "BaseClasses", "Settings",
-      "Helpers", "Validators", "Entities", "Pages"
+      "Helpers", "Validators", "Entities", "Pages", "Constants", "Utils", "ApiClients"
 }
 
 // Only warn for namespaces with few types declared in assemblies with more than 15 types.
