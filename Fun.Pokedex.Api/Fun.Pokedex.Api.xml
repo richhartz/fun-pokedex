@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Fun.Pokedex.Api</name>
+    </assembly>
+    <members>
+        <member name="T:Fun.Pokedex.Api.Controllers.PokemonController">
+            <summary>
+            Controller containing pokemon actions.
+            </summary>
+        </member>
+        <member name="M:Fun.Pokedex.Api.Controllers.PokemonController.#ctor(Fun.Pokedex.Core.Services.IPokedexService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fun.Pokedex.Api.Controllers.PokemonController"/> class.
+            </summary>
+            <param name="pokedexService">Instance of <see cref="T:Fun.Pokedex.Core.Services.IPokedexService"/>.</param>
+        </member>
+        <member name="M:Fun.Pokedex.Api.Controllers.PokemonController.GetAsync(System.String)">
+            <summary>
+            Returns basic information for a pokemon species.
+            </summary>
+            <param name="name">The name of the pokemon species.</param>
+            <returns>A <see cref="T:Fun.Pokedex.Core.Models.PokemonResultModel"/>.</returns>
+        </member>
+        <member name="M:Fun.Pokedex.Api.Controllers.PokemonController.GetTranslatedAsync(System.String)">
+            <summary>
+            Returns basic information for a pokemon species with the description translated.
+            </summary>
+            <param name="name">The name of the pokemon species.</param>
+            <returns>A <see cref="T:Fun.Pokedex.Core.Models.PokemonResultModel"/>.</returns>
+        </member>
+        <member name="T:Fun.Pokedex.Api.Program">
+            <summary>
+            Class containing the main entry point for the application.
+            </summary>
+        </member>
+        <member name="M:Fun.Pokedex.Api.Program.Main(System.String[])">
+            <summary>
+            Main entry point for the application.
+            </summary>
+            <param name="args">Optional arguments.</param>
+        </member>
+        <member name="T:Fun.Pokedex.Api.Startup">
+            <summary>
+            The Startup class configures services and the applications request pipeline.
+            </summary>
+        </member>
+        <member name="M:Fun.Pokedex.Api.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fun.Pokedex.Api.Startup"/> class.
+            </summary>
+            <param name="configuration"><see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/>.</param>
+        </member>
+        <member name="P:Fun.Pokedex.Api.Startup.Configuration">
+            <summary>
+            Gets a represents a set of key/value application configuration properties.
+            </summary>
+        </member>
+        <member name="M:Fun.Pokedex.Api.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+            <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.</param>
+        </member>
+        <member name="M:Fun.Pokedex.Api.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app">Provides the mechanisms to configure the application request pipelines. <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/>.</param>
+            <param name="env">Provides information regarding the hosting environment that the application is running in <see cref="T:Microsoft.AspNetCore.Hosting.IWebHostEnvironment"/>.</param>
+        </member>
+    </members>
+</doc>

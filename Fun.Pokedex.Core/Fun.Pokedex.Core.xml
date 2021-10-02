@@ -1,0 +1,300 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Fun.Pokedex.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Fun.Pokedex.Core.ApiClients.IPokeApiClient">
+            <summary>
+            Api client definition for making requests to PokeApi.
+            </summary>
+        </member>
+        <member name="M:Fun.Pokedex.Core.ApiClients.IPokeApiClient.GetSpeciesAsync(System.String)">
+            <summary>
+            Calls the pokemon-species/{name} endpoint.
+            </summary>
+            <param name="name">The name of the pokemon species.</param>
+            <returns>the <see cref="T:Fun.Pokedex.Core.Models.PokeApi.PokemonSpeciesModel"/>.</returns>
+        </member>
+        <member name="T:Fun.Pokedex.Core.ApiClients.ITranslationApiClient">
+            <summary>
+            definition of the api client for making requests to the translation api.
+            </summary>
+        </member>
+        <member name="M:Fun.Pokedex.Core.ApiClients.ITranslationApiClient.TranslateAsync(System.String,System.String)">
+            <summary>
+            Calls the translate/{translationType}?text={text} endpoint.
+            </summary>
+            <param name="text">The test to translate.</param>
+            <param name="translationTo">The language to translate to, e.g 'yoda', 'shakespeare'.</param>
+            <returns>The <see cref="T:Fun.Pokedex.Core.Models.TranslationModel"/>.</returns>
+        </member>
+        <member name="T:Fun.Pokedex.Core.ApiClients.PokeApiClient">
+            <inheritdoc cref="T:Fun.Pokedex.Core.ApiClients.IPokeApiClient"/>
+        </member>
+        <member name="M:Fun.Pokedex.Core.ApiClients.PokeApiClient.#ctor(System.Net.Http.HttpClient)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fun.Pokedex.Core.ApiClients.PokeApiClient"/> class.
+            </summary>
+            <param name="client">Provides a base first sending http request and receiving http responses.</param>
+        </member>
+        <member name="M:Fun.Pokedex.Core.ApiClients.PokeApiClient.GetSpeciesAsync(System.String)">
+            <inheritdoc cref="M:Fun.Pokedex.Core.ApiClients.IPokeApiClient.GetSpeciesAsync(System.String)"/>
+        </member>
+        <member name="T:Fun.Pokedex.Core.ApiClients.TranslationApiClient">
+            <summary>
+            Http client for making requests to the translation api.
+            </summary>
+        </member>
+        <member name="M:Fun.Pokedex.Core.ApiClients.TranslationApiClient.#ctor(System.Net.Http.HttpClient)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fun.Pokedex.Core.ApiClients.TranslationApiClient"/> class.
+            </summary>
+            <param name="client">Provides a base first sending http request and receiving http responses.</param>
+        </member>
+        <member name="M:Fun.Pokedex.Core.ApiClients.TranslationApiClient.TranslateAsync(System.String,System.String)">
+            <inheritdoc cref="M:Fun.Pokedex.Core.ApiClients.ITranslationApiClient.TranslateAsync(System.String,System.String)"/>
+        </member>
+        <member name="T:Fun.Pokedex.Core.Constants.Habitats">
+            <summary>
+            string constants representing habitats.
+            </summary>
+        </member>
+        <member name="F:Fun.Pokedex.Core.Constants.Habitats.Cave">
+            <summary>
+            cave constant.
+            </summary>
+        </member>
+        <member name="T:Fun.Pokedex.Core.Constants.Languages">
+            <summary>
+            string constant fields representing languages.
+            </summary>
+        </member>
+        <member name="F:Fun.Pokedex.Core.Constants.Languages.Default">
+            <summary>
+            Default language.
+            </summary>
+        </member>
+        <member name="F:Fun.Pokedex.Core.Constants.Languages.Yoda">
+            <summary>
+            Starwars Yoda language.
+            </summary>
+        </member>
+        <member name="F:Fun.Pokedex.Core.Constants.Languages.Shakespeare">
+            <summary>
+            shakespeare language.
+            </summary>
+        </member>
+        <member name="T:Fun.Pokedex.Core.Extensions.HttpClientExtensions">
+            <summary>
+            Class containing HttpClient Extension methods.
+            </summary>
+        </member>
+        <member name="M:Fun.Pokedex.Core.Extensions.HttpClientExtensions.GetAsync``1(System.Net.Http.HttpClient,System.String)">
+            <summary>
+            Simple extension for http client to deserialize to type TResult. any non success status code will return null and log the error response.
+            </summary>
+            <typeparam name="TResult">The expected return type.</typeparam>
+            <param name="client">the http client.</param>
+            <param name="requestUrl">The url to make the get request against.</param>
+            <returns>The response content deserialize to type TResult. Or null if a non success status code is returned.</returns>
+        </member>
+        <member name="T:Fun.Pokedex.Core.Extensions.ObjectExtensions">
+            <summary>
+            Object extensions, well one anyway.
+            </summary>
+        </member>
+        <member name="M:Fun.Pokedex.Core.Extensions.ObjectExtensions.ToActionResult(System.Object)">
+            <summary>
+            Returns either an ok result or no content if the object is null.
+            </summary>
+            <param name="obj">The result object to check.</param>
+            <returns>OkResult or NoContentResult.</returns>
+        </member>
+        <member name="T:Fun.Pokedex.Core.Extensions.PokemonSpeciesModelExtensions">
+            <summary>
+            Extensions to the class <see cref="T:Fun.Pokedex.Core.Models.PokeApi.PokemonSpeciesModel"/>.
+            </summary>
+        </member>
+        <member name="M:Fun.Pokedex.Core.Extensions.PokemonSpeciesModelExtensions.ToPokemonModel(Fun.Pokedex.Core.Models.PokeApi.PokemonSpeciesModel)">
+            <summary>
+            Maps a <see cref="T:Fun.Pokedex.Core.Models.PokeApi.PokemonSpeciesModel"/> to a <see cref="T:Fun.Pokedex.Core.Models.PokemonResultModel"/>.
+            </summary>
+            <param name="model">The <see cref="T:Fun.Pokedex.Core.Models.PokeApi.PokemonSpeciesModel"/>.</param>
+            <returns>the pokemonModel or or null if model input is null.</returns>
+        </member>
+        <member name="M:Fun.Pokedex.Core.Extensions.PokemonSpeciesModelExtensions.Description(Fun.Pokedex.Core.Models.PokeApi.PokemonSpeciesModel)">
+            <summary>
+            Maps a <see cref="T:Fun.Pokedex.Core.Models.PokeApi.PokemonSpeciesModel"/> to a <see cref="T:Fun.Pokedex.Core.Models.PokemonResultModel"/>.
+            </summary>
+            <param name="model">The <see cref="T:Fun.Pokedex.Core.Models.PokeApi.PokemonSpeciesModel"/>.</param>
+            <returns>Cleaned description string from the first flavor text entry matching the default language.</returns>
+        </member>
+        <member name="T:Fun.Pokedex.Core.Extensions.StringExtensions">
+            <summary>
+            Custom string extension methods.
+            </summary>
+        </member>
+        <member name="M:Fun.Pokedex.Core.Extensions.StringExtensions.ToCleanString(System.String)">
+            <summary>
+            Replaces \n and \f with spaces.
+            </summary>
+            <param name="str">the string to clean up.</param>
+            <returns>The cleaned string.</returns>
+        </member>
+        <member name="T:Fun.Pokedex.Core.Models.TranslationContentsModel">
+            <summary>
+            Dto for reading in translation responses.
+            </summary>
+        </member>
+        <member name="P:Fun.Pokedex.Core.Models.TranslationContentsModel.Translated">
+            <summary>
+            Gets the translated text.
+            </summary>
+        </member>
+        <member name="T:Fun.Pokedex.Core.Models.TranslationModel">
+            <summary>
+            Dto for used to read translation responses.
+            </summary>
+        </member>
+        <member name="P:Fun.Pokedex.Core.Models.TranslationModel.Contents">
+            <summary>
+            gets an object which is just a wrapper for the translated text.
+            </summary>
+        </member>
+        <member name="T:Fun.Pokedex.Core.Models.PokeApi.FlavorTextModel">
+            <summary>
+            The flavor text for a pokemon.
+            </summary>
+        </member>
+        <member name="P:Fun.Pokedex.Core.Models.PokeApi.FlavorTextModel.Text">
+            <summary>
+            Gets the localized name for an API resource in a specific language.
+            </summary>
+        </member>
+        <member name="P:Fun.Pokedex.Core.Models.PokeApi.FlavorTextModel.Language">
+            <summary>
+            Gets the language this text resource is in.
+            </summary>
+        </member>
+        <member name="T:Fun.Pokedex.Core.Models.PokeApi.NamedResourceModel">
+            <summary>
+            The flavor text for an ability.
+            </summary>
+        </member>
+        <member name="P:Fun.Pokedex.Core.Models.PokeApi.NamedResourceModel.Name">
+            <summary>
+            Gets or sets the name of the resource.
+            </summary>
+        </member>
+        <member name="T:Fun.Pokedex.Core.Models.PokeApi.PokemonSpeciesModel">
+            <summary>
+            A dto model for retrieving information from the pokeApi.
+            </summary>
+        </member>
+        <member name="P:Fun.Pokedex.Core.Models.PokeApi.PokemonSpeciesModel.Id">
+            <summary>
+            Gets the pokemon species id as defined by the poke api.
+            </summary>
+        </member>
+        <member name="P:Fun.Pokedex.Core.Models.PokeApi.PokemonSpeciesModel.Habitat">
+            <summary>
+            Gets or sets the pokemon habitat id as defined by the poke api.
+            </summary>
+        </member>
+        <member name="P:Fun.Pokedex.Core.Models.PokeApi.PokemonSpeciesModel.FlavorTextEntries">
+            <summary>
+            Gets the list of flavor text entries returned by the poke api.
+            </summary>
+        </member>
+        <member name="P:Fun.Pokedex.Core.Models.PokeApi.PokemonSpeciesModel.IsLegendary">
+            <summary>
+            Gets or sets a value indicating whether the pokemon is a legend.
+            </summary>
+        </member>
+        <member name="T:Fun.Pokedex.Core.Models.PokemonResultModel">
+            <summary>
+            A model providing basic pokemon inforation.
+            </summary>
+        </member>
+        <member name="P:Fun.Pokedex.Core.Models.PokemonResultModel.Id">
+            <summary>
+            Gets the pokemon species id as defined by the poke api.
+            </summary>
+        </member>
+        <member name="P:Fun.Pokedex.Core.Models.PokemonResultModel.Name">
+            <summary>
+            Gets the pokemon species id as defined by the poke api.
+            </summary>
+        </member>
+        <member name="P:Fun.Pokedex.Core.Models.PokemonResultModel.Description">
+            <summary>
+            Gets or sets the description as defined by the poke api, this may be translated.
+            </summary>
+        </member>
+        <member name="P:Fun.Pokedex.Core.Models.PokemonResultModel.Habitat">
+            <summary>
+            Gets the pokemon habitat id as defined by the poke api.
+            </summary>
+        </member>
+        <member name="P:Fun.Pokedex.Core.Models.PokemonResultModel.IsLegendary">
+            <summary>
+            Gets a value indicating whether the pokemon is ** legend.
+            </summary>
+        </member>
+        <member name="P:Fun.Pokedex.Core.Models.PokemonResultModel.Language">
+            <summary>
+            Gets or sets a value indicating the language used in the description.
+            </summary>
+        </member>
+        <member name="T:Fun.Pokedex.Core.Services.IPokedexService">
+            <summary>
+            Definition of the pokedex service.
+            </summary>
+        </member>
+        <member name="M:Fun.Pokedex.Core.Services.IPokedexService.GetByNameAsync(System.String)">
+            <summary>
+            Returns basic information for a pokemon species.
+            </summary>
+            <param name="name">The name of the pokemon species.</param>
+            <returns>A <see cref="T:Fun.Pokedex.Core.Models.PokemonResultModel"/>.</returns>
+        </member>
+        <member name="M:Fun.Pokedex.Core.Services.IPokedexService.GetTranslatedAsync(System.String)">
+            <summary>
+            Returns basic information for a pokemon species with the description translated.
+            </summary>
+            <param name="name">The name of the pokemon species.</param>
+            <returns>A <see cref="T:Fun.Pokedex.Core.Models.PokemonResultModel"/>.</returns>
+        </member>
+        <member name="T:Fun.Pokedex.Core.Services.PokedexService">
+            <summary>
+            service for retrieving pokemon data from the apis.
+            </summary>
+        </member>
+        <member name="M:Fun.Pokedex.Core.Services.PokedexService.#ctor(Fun.Pokedex.Core.ApiClients.IPokeApiClient,Fun.Pokedex.Core.ApiClients.ITranslationApiClient)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fun.Pokedex.Core.Services.PokedexService"/> class.
+            </summary>
+            <param name="pokeApi">HttpClient wrapper for PokeApi, <see cref="T:Fun.Pokedex.Core.ApiClients.PokeApiClient"/>.</param>
+            <param name="translationApi">HttpClient wrapper for translations, <see cref="T:Fun.Pokedex.Core.ApiClients.TranslationApiClient"/>.</param>
+        </member>
+        <member name="M:Fun.Pokedex.Core.Services.PokedexService.GetByNameAsync(System.String)">
+            <inheritdoc cref="M:Fun.Pokedex.Core.Services.IPokedexService.GetByNameAsync(System.String)"/>
+        </member>
+        <member name="M:Fun.Pokedex.Core.Services.PokedexService.GetTranslatedAsync(System.String)">
+            <inheritdoc cref="M:Fun.Pokedex.Core.Services.IPokedexService.GetTranslatedAsync(System.String)"/>
+        </member>
+        <member name="T:Fun.Pokedex.Core.Utils.Guard">
+            <summary>
+            A static guard helper class for checking arguments.
+            </summary>
+        </member>
+        <member name="M:Fun.Pokedex.Core.Utils.Guard.AgainstNull(System.String,System.Object)">
+            <summary>
+            throws ArgumentNullException is value is null.
+            </summary>
+            <param name="argumentName">The name of the argument to check.</param>
+            <param name="value">The value of the argument.</param>
+        </member>
+    </members>
+</doc>

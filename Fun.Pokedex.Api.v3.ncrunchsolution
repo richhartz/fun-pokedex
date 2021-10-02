@@ -1,0 +1,10 @@
+﻿<SolutionConfiguration>
+  <Settings>
+    <AllowParallelTestExecution>True</AllowParallelTestExecution>
+    <MetricsExclusionList>
+      <Value>Fun.Pokedex.Core\Fun.Pokedex.Core.csproj\Converters</Value>
+      <Value>Converters\PokemonModelConvertor.cs:Fun.Pokedex.Core\Fun.Pokedex.Core.csproj</Value>
+    </MetricsExclusionList>
+    <SolutionConfigured>True</SolutionConfigured>
+  </Settings>
+</SolutionConfiguration>
