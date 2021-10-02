@@ -53,7 +53,7 @@ namespace Fun.Pokedex.Core.UnitTests.Extensions
             // Act
             var actual = Fixtures.PokemonSpeciesModel.ToPokemonModel();
 
-            var expected = Fixtures.PokemonSpeciesModel.FlavorTextEntries.FirstOrDefault(x => x.Language.Name == Languages.Default)?.Text;
+            var expected = Fixtures.PokemonSpeciesModel.FlavorTextEntries.FirstOrDefault(x => x.Language.Name == Languages.Default)?.Text.ReplaceLineBreaksWithSpaces();
 
             // Assert
             Assert.AreEqual(expected, actual.Description);

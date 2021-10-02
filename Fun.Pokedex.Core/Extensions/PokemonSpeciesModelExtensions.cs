@@ -44,7 +44,8 @@ namespace Fun.Pokedex.Core.Extensions
         /// <returns>Cleaned description string from the first flavor text entry matching the default language.</returns>
         private static string Description(this PokemonSpeciesModel model)
         {
-            return model.FlavorTextEntries?.FirstOrDefault(x => x.Language.Name == Languages.Default)?.Text;
+            return model.FlavorTextEntries?.FirstOrDefault(x => x.Language.Name == Languages.Default)?.Text
+                .ReplaceLineBreaksWithSpaces();
         }
     }
 }

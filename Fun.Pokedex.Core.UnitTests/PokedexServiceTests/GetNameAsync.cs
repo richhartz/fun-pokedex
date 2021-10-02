@@ -7,6 +7,7 @@ namespace Fun.Pokedex.Core.UnitTests.PokedexServiceTests
     using System.Linq;
     using System.Threading.Tasks;
     using Fun.Pokedex.Core.Constants;
+    using Fun.Pokedex.Core.Extensions;
     using Fun.Pokedex.Core.Models;
     using Fun.Pokedex.Core.Services;
     using Moq;
@@ -85,7 +86,7 @@ namespace Fun.Pokedex.Core.UnitTests.PokedexServiceTests
             var actual = await ServiceUnderTest.GetByNameAsync(Fixtures.PokemonSpeciesModel.Name);
 
             var expected = Fixtures.PokemonSpeciesModel.FlavorTextEntries
-                .FirstOrDefault(x => x.Language.Name == Languages.Default)?.Text;
+                .FirstOrDefault(x => x.Language.Name == Languages.Default)?.Text.ReplaceLineBreaksWithSpaces();
 
             // Assert
             Assert.AreEqual(expected, actual.Description);

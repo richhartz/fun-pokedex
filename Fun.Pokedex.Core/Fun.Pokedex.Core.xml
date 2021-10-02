@@ -135,7 +135,7 @@
             Custom string extension methods.
             </summary>
         </member>
-        <member name="M:Fun.Pokedex.Core.Extensions.StringExtensions.ToCleanString(System.String)">
+        <member name="M:Fun.Pokedex.Core.Extensions.StringExtensions.ReplaceLineBreaksWithSpaces(System.String)">
             <summary>
             Replaces \n and \f with spaces.
             </summary>
