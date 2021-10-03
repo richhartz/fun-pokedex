@@ -2,11 +2,11 @@
 // Copyright (c) Pokedex :). All rights reserved.
 // </copyright>
 
-using Serilog;
-
 namespace Fun.Logging.Startup
 {
     using Microsoft.AspNetCore.Builder;
+    using Serilog;
+    using System;
 
     /// <summary>
     /// IApplicationBuilder extensions to set up error handling.
@@ -14,23 +14,20 @@ namespace Fun.Logging.Startup
     public static class FunLoggingAppBuilderExtensions
     {
         /// <summary>
-        /// Sets up the error handling middleware.
-        /// </summary>
-        /// <param name="app">the <see cref="IApplicationBuilder"/>.</param>
-        /// <returns>The <see cref="IApplicationBuilder"/> which middleware added.</returns>
-        public static void UseFunErrorLogging(this IApplicationBuilder app)
-        {
-            app.UseMiddleware<ErrorLoggingMiddleware>();
-        }
-
-        /// <summary>
         /// Configures logging for the application.
         /// </summary>
-        /// <param name="builder">The <see cref="IApplicationBuilder"/>.</param>
+        /// <param name="app">The <see cref="IApplicationBuilder"/>.</param>
+        /// <returns>The <see cref="IApplicationBuilder"/> which middleware added.</returns>
         // ReSharper disable once UnusedMember.Global
-        public static void UseFunLogging(this IApplicationBuilder builder)
+        public static IApplicationBuilder UseFunLogging(this IApplicationBuilder app)
         {
-            builder.UseSerilogRequestLogging();
+            if (app == null)
+            {
+                throw new ArgumentNullException(nameof(app));
+            }
+
+            return app.UseSerilogRequestLogging();
         }
     }
 }
+

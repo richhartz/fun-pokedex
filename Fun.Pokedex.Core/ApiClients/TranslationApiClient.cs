@@ -8,6 +8,7 @@ namespace Fun.Pokedex.Core.ApiClients
     using System.Threading.Tasks;
     using Fun.Pokedex.Core.Extensions;
     using Fun.Pokedex.Core.Models.FunTranslation;
+    using Fun.Pokedex.Core.Utils;
 
     /// <summary>
     /// Http client for making requests to the translation api.
@@ -22,12 +23,17 @@ namespace Fun.Pokedex.Core.ApiClients
         /// <param name="client">Provides a base first sending http request and receiving http responses.</param>
         public TranslationApiClient(HttpClient client)
         {
+            Guard.AgainstNull(nameof(client), client);
+
             httpClient = client;
         }
 
         /// <inheritdoc cref="ITranslationApiClient.TranslateAsync"/>
         public async Task<TranslationModel> TranslateAsync(string text, string translationTo)
         {
+            Guard.AgainstNull(nameof(text), text);
+            Guard.AgainstNull(nameof(translationTo), translationTo);
+
             return await httpClient.GetAsync<TranslationModel>($"translate/{translationTo}?text={text}");
         }
     }

@@ -1,14 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>a046356b-1cf3-4472-8f19-6c4ec2e05e83</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <Nullable>disable</Nullable>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Users\richardhartzenberg\source\repos\TrueLayer.Pokedex.Api\Fun.Pokedex.Api\Fun.Pokedex.Api.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

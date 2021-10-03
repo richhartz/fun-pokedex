@@ -6,6 +6,7 @@ namespace Fun.Pokedex.Core.Extensions
 {
     using System.Net.Http;
     using System.Threading.Tasks;
+    using Fun.Pokedex.Core.Utils;
     using Newtonsoft.Json;
     using Serilog;
 
@@ -23,6 +24,8 @@ namespace Fun.Pokedex.Core.Extensions
         /// <returns>The response content deserialize to type TResult. Or null if a non success status code is returned.</returns>
         public static async Task<TResult> GetAsync<TResult>(this HttpClient client, string requestUrl)
         {
+            Guard.AgainstNull(nameof(requestUrl), requestUrl);
+
             var response = await client.GetAsync(requestUrl);
 
             if (!response.IsSuccessStatusCode)

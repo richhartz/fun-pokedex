@@ -5,6 +5,7 @@
 namespace Fun.Pokedex.Api
 {
     using System;
+    using Fun.ExceptionHandling.Startup;
     using Fun.Logging.Startup;
     using Fun.Pokedex.Core.ApiClients;
     using Fun.Pokedex.Core.Services;
@@ -12,8 +13,8 @@ namespace Fun.Pokedex.Api
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
     using Microsoft.OpenApi.Models;
+    using Serilog;
 
     /// <summary>
     /// The Startup class configures services and the applications request pipeline.
@@ -42,14 +43,16 @@ namespace Fun.Pokedex.Api
         {
             services.AddFunLogging("Fun.Pokedex", "v1");
 
+            Log.Logger.Information("Configuring services");
+
             services.AddHttpClient<IPokeApiClient, PokeApiClient>(c =>
             {
-                c.BaseAddress = new Uri(Configuration.GetValue<string>("Api:PokeApi"));
+                c.BaseAddress = new Uri(Configuration.GetValue<string>("ApiClients:PokeApi"));
             });
 
             services.AddHttpClient<ITranslationApiClient, TranslationApiClient>(c =>
             {
-                c.BaseAddress = new Uri(Configuration.GetValue<string>("Api:TranslationApi"));
+                c.BaseAddress = new Uri(Configuration.GetValue<string>("ApiClients:TranslationApi"));
             });
 
             services.AddTransient<IPokedexService, PokedexService>();
@@ -81,20 +84,22 @@ namespace Fun.Pokedex.Api
         /// <param name="env">Provides information regarding the hosting environment that the application is running in <see cref="IWebHostEnvironment"/>.</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseFunLogging();
-            app.UseFunErrorLogging();
+            Log.Logger.Information("Configuring HTTP request pipeline");
 
-            if (env.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Fun.Pokedex.Api v1"));
-            }
+            // May not expose swagger in production.
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Fun.Pokedex.Api v1"));
+
+            app.UseFunLogging();
+
+            app.UseFunExceptionHandler();
 
             app.UseHttpsRedirection();
 
-            app.UseCors("FunCorsPolicy");
-
             app.UseRouting();
+
+            app.UseCors("FunCorsPolicy");
 
             app.UseAuthorization();
 

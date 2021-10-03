@@ -6,7 +6,6 @@ namespace Fun.Pokedex.Api.Controllers
 {
     using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
-    using Fun.Pokedex.Core.Extensions;
     using Fun.Pokedex.Core.Models;
     using Fun.Pokedex.Core.Services;
     using Microsoft.AspNetCore.Mvc;
@@ -37,7 +36,7 @@ namespace Fun.Pokedex.Api.Controllers
         [HttpGet("/{name}")]
         public async Task<ActionResult> GetAsync([FromRoute] [Required] string name)
         {
-            return (await pokedexService.GetByNameAsync(name)).ToActionResult();
+            return Ok(await pokedexService.GetByNameAsync(name));
         }
 
         /// <summary>
@@ -48,7 +47,7 @@ namespace Fun.Pokedex.Api.Controllers
         [HttpGet("/translated/{name}")]
         public async Task<ActionResult> GetTranslatedAsync([FromRoute] [Required] string name)
         {
-            return (await pokedexService.GetTranslatedAsync(name)).ToActionResult();
+            return Ok(await pokedexService.GetTranslatedAsync(name));
         }
     }
 }

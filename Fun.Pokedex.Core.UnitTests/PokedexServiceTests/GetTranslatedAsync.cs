@@ -7,6 +7,7 @@ namespace Fun.Pokedex.Core.UnitTests.PokedexServiceTests
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using Fun.ExceptionHandling;
     using Fun.Pokedex.Core.Constants;
     using Fun.Pokedex.Core.Extensions;
     using Fun.Pokedex.Core.Models;
@@ -33,17 +34,14 @@ namespace Fun.Pokedex.Core.UnitTests.PokedexServiceTests
         }
 
         [Test]
-        public async Task Given_PokeApi_Returns_Null_Should_Return_Null()
+        public void Given_PokeApi_Returns_Null_Should_Throw_FunResourceNotFoundException()
         {
             // Arrange
             MockPokeApiClient.Setup(x => x.GetSpeciesAsync(It.IsAny<string>()))
                 .Returns(Task.FromResult(default(PokemonSpeciesModel)));
 
-            // Act
-            var actual = await ServiceUnderTest.GetTranslatedAsync(Fixtures.PokemonSpeciesModel.Name);
-
             // Assert
-            Assert.IsNull(actual);
+            Assert.ThrowsAsync<FunResourceNotFoundException>(async () => await ServiceUnderTest.GetTranslatedAsync(Fixtures.PokemonSpeciesModel.Name));
         }
 
         [Test]

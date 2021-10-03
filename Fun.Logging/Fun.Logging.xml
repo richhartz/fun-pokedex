@@ -4,18 +4,18 @@
         <name>Fun.Logging</name>
     </assembly>
     <members>
-        <member name="T:Fun.Logging.ErrorLoggingMiddleware">
+        <member name="T:Fun.Logging.FunExceptionHandlingMiddleware">
             <summary>
-            Defines the ErrorLoggingMiddleware class.
+            Defines the FunExceptionHandlingMiddleware class.
             </summary>
         </member>
-        <member name="M:Fun.Logging.ErrorLoggingMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+        <member name="M:Fun.Logging.FunExceptionHandlingMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
             <summary>
-            Initializes a new instance of the <see cref="T:Fun.Logging.ErrorLoggingMiddleware"/> class.
+            Initializes a new instance of the <see cref="T:Fun.Logging.FunExceptionHandlingMiddleware"/> class.
             </summary>
             <param name="next">The <see cref="T:Microsoft.AspNetCore.Http.RequestDelegate"/>.</param>
         </member>
-        <member name="M:Fun.Logging.ErrorLoggingMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+        <member name="M:Fun.Logging.FunExceptionHandlingMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
             <summary>
             Invokes the next delegate.
             </summary>
@@ -27,7 +27,7 @@
             IApplicationBuilder extensions to set up error handling.
             </summary>
         </member>
-        <member name="M:Fun.Logging.Startup.FunLoggingAppBuilderExtensions.UseFunErrorLogging(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+        <member name="M:Fun.Logging.Startup.FunLoggingAppBuilderExtensions.UseFunExceptionHandler(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
             <summary>
             Sets up the error handling middleware.
             </summary>

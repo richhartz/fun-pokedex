@@ -1,8 +1,8 @@
-﻿// <copyright file="ErrorLoggingMiddleware.cs" company="Pokedex :)">
+﻿// <copyright file="FunExceptionHandlingMiddleware.cs" company="Pokedex :)">
 // Copyright (c) Pokedex :). All rights reserved.
 // </copyright>
 
-namespace Fun.Logging
+namespace Fun.ExceptionHandling
 {
     using System;
     using System.Net;
@@ -11,22 +11,21 @@ namespace Fun.Logging
     using Serilog;
 
     /// <summary>
-    /// Defines the ErrorLoggingMiddleware class.
+    /// Defines the FunExceptionHandlingMiddleware class.
     /// </summary>
     // ReSharper disable once ClassNeverInstantiated.Global
-    public class ErrorLoggingMiddleware
+    public class FunExceptionHandlingMiddleware
     {
-        private readonly RequestDelegate _next;
-        private readonly ILogger _logger = Log.Logger;
-        private readonly bool enableVerboseResponse = false;
+        private readonly RequestDelegate next;
+        private readonly ILogger logger = Log.Logger;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ErrorLoggingMiddleware"/> class.
+        /// Initializes a new instance of the <see cref="FunExceptionHandlingMiddleware"/> class.
         /// </summary>
         /// <param name="next">The <see cref="RequestDelegate"/>.</param>
-        public ErrorLoggingMiddleware(RequestDelegate next)
+        public FunExceptionHandlingMiddleware(RequestDelegate next)
         {
-            _next = next;
+            this.next = next;
         }
 
         /// <summary>
@@ -39,7 +38,7 @@ namespace Fun.Logging
         {
             try
             {
-                await _next(context).ConfigureAwait(false);
+                await next(context).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -54,35 +53,31 @@ namespace Fun.Logging
 
         private static string Format(Exception ex)
         {
-            return $"Exception: {ex.Message}";
+            return $"Error: {ex.Message}";
         }
 
         private async Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
-            // Log the error.
-            _logger.Error(exception, exception.Message);
-
-            if (!context.Response.HasStarted)
+            // Handle custom exception types.
+            if (exception is FunResourceNotFoundException)
             {
-                context.Response.ContentType = "text/plain";
+                context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+            }
+            else
+            {
+                // Log the error.
+                logger.Error(exception, exception.Message);
 
-                // Limit the returned status codes.
-                if (context.Response.StatusCode != (int)HttpStatusCode.Unauthorized)
+                // Limit the returned error status codes.
+                if (context.Response.StatusCode != (int)HttpStatusCode.Unauthorized &&
+                    context.Response.StatusCode != (int)HttpStatusCode.NotFound)
                 {
                     context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 }
             }
 
-            if (enableVerboseResponse)
-            {
-                _logger.Verbose("Exception: {Exception}. Inner Exception: {InnerException}. Stack Trace: {StackTrace}.", exception, exception.InnerException, exception.StackTrace);
-
-                await context.Response.WriteAsync(FormatVerbose(exception)).ConfigureAwait(false);
-            }
-            else
-            {
-                await context.Response.WriteAsync(Format(exception)).ConfigureAwait(false);
-            }
+            context.Response.ContentType = "text/plain";
+            await context.Response.WriteAsync(Format(exception)).ConfigureAwait(false);
         }
     }
 }

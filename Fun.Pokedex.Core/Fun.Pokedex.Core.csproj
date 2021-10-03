@@ -5,10 +5,6 @@
     <Nullable>disable</Nullable>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Users\richardhartzenberg\source\repos\TrueLayer.Pokedex.Api\Fun.Pokedex.Core\Fun.Pokedex.Core.xml</DocumentationFile>
-  </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
@@ -27,6 +23,10 @@
 		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
 			<_Parameter1>$(AssemblyName).UnitTests</_Parameter1>
 		</AssemblyAttribute>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Fun.ExceptionHandling\Fun.ExceptionHandling.csproj" />
 	</ItemGroup>
 
 </Project>

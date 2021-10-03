@@ -5,6 +5,7 @@
 namespace Fun.Pokedex.Core.Services
 {
     using System.Threading.Tasks;
+    using Fun.ExceptionHandling;
     using Fun.Pokedex.Core.ApiClients;
     using Fun.Pokedex.Core.Constants;
     using Fun.Pokedex.Core.Extensions;
@@ -26,6 +27,9 @@ namespace Fun.Pokedex.Core.Services
         /// <param name="translationApi">HttpClient wrapper for translations, <see cref="TranslationApiClient"/>.</param>
         public PokedexService(IPokeApiClient pokeApi, ITranslationApiClient translationApi)
         {
+            Guard.AgainstNull(nameof(pokeApi), pokeApi);
+            Guard.AgainstNull(nameof(translationApi), translationApi);
+
             pokeApiClient = pokeApi;
             translationApiClient = translationApi;
         }
@@ -37,7 +41,14 @@ namespace Fun.Pokedex.Core.Services
 
             var speciesModel = await pokeApiClient.GetSpeciesAsync(name);
 
-            return speciesModel.ToPokemonModel();
+            var pokemon = speciesModel.ToPokemonModel();
+
+            if (pokemon == null)
+            {
+                throw new FunResourceNotFoundException("Pokemon Not Found");
+            }
+
+            return pokemon;
         }
 
         /// <inheritdoc cref="IPokedexService.GetTranslatedAsync"/>
@@ -49,7 +60,7 @@ namespace Fun.Pokedex.Core.Services
 
             if (pokemon == null)
             {
-                return null;
+                throw new FunResourceNotFoundException("Pokemon Not Found");
             }
 
             var translateTo = pokemon.IsLegendary || (pokemon.Habitat == Habitats.Cave) ? Languages.Yoda : Languages.Shakespeare;

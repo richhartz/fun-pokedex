@@ -2,11 +2,10 @@
 // Copyright (c) Fun. All rights reserved.
 // </copyright>
 
-
+using System;
 
 namespace Fun.Logging.Startup
 {
-    using Microsoft.AspNetCore.Builder;
     using Microsoft.Extensions.DependencyInjection;
     using Serilog;
     using Serilog.Events;
@@ -30,6 +29,11 @@ namespace Fun.Logging.Startup
             this IServiceCollection services,
             string serviceName, string serviceVersion)
         {
+            if (services == null)
+            {
+                throw new ArgumentNullException(nameof(services));
+            }
+
             var loggerConfiguration = new LoggerConfiguration()
                 .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
                 .Enrich.FromLogContext()
