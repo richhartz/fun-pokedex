@@ -71,5 +71,6 @@ docker-compose up -d
 - Potentially heavier more verbose logging, I have opted not to log every request and response to the Poke and Translation API as the information is trivial.
  - Add middleware to include additional security headers to requests, depending on our required limitations, e.g X-Frame-Options, X-Content-Type-Options, X-XSS-Protection, Strict-Transport-Security
  - Remove any uneccessary headers that expose server information.
+ - Wrap the error responses in a standard object rather than just a string response. 
 
 
